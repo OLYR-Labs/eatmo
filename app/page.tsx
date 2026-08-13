@@ -716,16 +716,8 @@ export default function Home() {
                 Contact
               </a>
 
-              {/* GET DIRECTIONS */}
-              <a
-                href={DIRECTIONS}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#4b249f] via-[#6d3fd1] to-[#9467df] px-5 py-2.5 font-bold text-white shadow-lg shadow-purple-900/20 transition hover:-translate-y-0.5 hover:shadow-purple-900/30"
-              >
-                <Navigation size={15} />
-                Get Directions
-              </a>
+              
+              
             </div>
           </div>
         </div>
