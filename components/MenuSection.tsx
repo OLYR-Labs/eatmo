@@ -1,0 +1,169 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { Utensils } from "lucide-react";
+
+import type { MenuCategory } from "@/data/menu";
+
+export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
+  const [active, setActive] = useState(menu[0]?.category ?? "Rice");
+
+  const category = useMemo(
+    () => menu.find((item) => item.category === active) ?? menu[0],
+    [active, menu]
+  );
+
+  if (!category) return null;
+
+  const hasSizes = category.items.some(
+    (item) => item.small !== undefined || item.large !== undefined
+  );
+
+  return (
+    <section id="menu" className="bg-[#f4f0fa] py-16 md:py-24">
+      <div className="container">
+        <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <span className="eyebrow">The EATMO menu</span>
+            <h2 className="display mt-4 text-4xl md:text-5xl">
+              Something for everyone.
+            </h2>
+          </div>
+
+          <p className="max-w-md text-sm leading-6 text-gray-600">
+            Explore our complete menu. All prices are displayed in LKR.
+          </p>
+        </div>
+
+        <div className="mt-8 flex gap-2 overflow-x-auto pb-3 scrollbar-hide">
+          {menu.map((item) => {
+            const isActive = active === item.category;
+
+            return (
+              <button
+                key={item.category}
+                type="button"
+                onClick={() => setActive(item.category)}
+                aria-pressed={isActive}
+                className={`shrink-0 whitespace-nowrap rounded-full px-5 py-3 text-sm font-bold transition-all duration-200 ${
+                  isActive
+                    ? "bg-gradient-to-r from-[#4b249f] via-[#6d3fd1] to-[#9467df] text-white shadow-lg shadow-purple-200"
+                    : "bg-white text-gray-700 shadow-sm hover:bg-purple-50 hover:text-purple-700"
+                }`}
+              >
+                {item.category}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="soft mt-6 overflow-hidden bg-white shadow-sm">
+          <div className="bg-gradient-to-r from-[#4b249f] via-[#6d3fd1] to-[#9467df] px-5 py-7 text-white md:px-8">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-200">
+                  EATMO MENU
+                </p>
+                <h3 className="display mt-2 text-3xl md:text-4xl">
+                  {category.category}
+                </h3>
+              </div>
+              <Utensils className="mt-1 shrink-0 text-purple-200" size={26} />
+            </div>
+
+            {hasSizes && (
+              <div className="mt-6 hidden justify-end gap-2 pr-1 sm:flex">
+                <div className="w-[105px] text-center text-[10px] font-bold uppercase tracking-wider text-purple-200">
+                  Small
+                </div>
+                <div className="w-[105px] text-center text-[10px] font-bold uppercase tracking-wider text-purple-200">
+                  Large
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="divide-y divide-gray-100">
+            {category.items.map((item, index) => {
+              const hasPrice = item.price !== undefined;
+              const hasSmall = item.small !== undefined;
+              const hasLarge = item.large !== undefined;
+
+              return (
+                <div
+                  key={`${category.category}-${item.name}-${index}`}
+                  className="px-5 py-5 transition hover:bg-purple-50/50 md:px-8"
+                >
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="min-w-0">
+                      <h4 className="font-bold text-gray-900">{item.name}</h4>
+                      {item.unit && (
+                        <p className="mt-1 text-xs font-medium text-gray-500">
+                          {item.unit}
+                        </p>
+                      )}
+                    </div>
+
+                    {hasPrice ? (
+                      <div className="flex shrink-0 items-center sm:min-w-[220px] sm:justify-end">
+                        <div className="rounded-2xl bg-purple-50 px-6 py-3 text-right">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
+                            Price
+                          </span>
+                          <span className="text-base font-bold text-[var(--purple-dark)]">
+                            LKR {item.price!.toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    ) : hasSmall || hasLarge ? (
+                      <div className="flex shrink-0 items-center gap-2 sm:min-w-[220px] sm:justify-end">
+                        <div className="w-[105px] rounded-2xl bg-purple-50 px-3 py-3 text-center">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
+                            Small
+                          </span>
+                          <span className="mt-1 block text-sm font-bold text-[var(--purple-dark)]">
+                            {hasSmall ? `LKR ${item.small!.toLocaleString()}` : "—"}
+                          </span>
+                        </div>
+                        <div className="w-[105px] rounded-2xl bg-purple-50 px-3 py-3 text-center">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
+                            Large
+                          </span>
+                          <span className="mt-1 block text-sm font-bold text-[var(--purple-dark)]">
+                            {hasLarge ? `LKR ${item.large!.toLocaleString()}` : "—"}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="rounded-2xl bg-gray-50 px-5 py-3 text-sm font-semibold text-gray-400">
+                        Price unavailable
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {category.notes && category.notes.length > 0 && (
+            <div className="border-t border-purple-100 bg-purple-50 px-5 py-5 md:px-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-purple-600">
+                Special options
+              </p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                {category.notes.map((note, index) => (
+                  <div
+                    key={`${category.category}-note-${index}`}
+                    className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-gray-700 shadow-sm"
+                  >
+                    {note}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
