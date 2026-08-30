@@ -4,22 +4,15 @@ import { structureTool } from "sanity/structure";
 
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schema } from "./sanity/schemaTypes";
-import { structure } from "./sanity/structure";
+import { structure } from "./sanity/structureConfig";
 
 export default defineConfig({
   basePath: "/studio",
   projectId,
   dataset,
-
   schema,
-
   plugins: [
-    structureTool({
-      structure,
-    }),
-
-    visionTool({
-      defaultApiVersion: apiVersion,
-    }),
+    structureTool({ structure }),
+    visionTool({ defaultApiVersion: apiVersion }),
   ],
 });
