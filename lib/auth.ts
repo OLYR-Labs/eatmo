@@ -10,12 +10,12 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   emailAndPassword: {
     enabled: true,
-    disableSignUp: false,
+    disableSignUp: true,
     minPasswordLength: 8,
     revokeSessionsOnPasswordReset: true,
   },
   session: { expiresIn: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24 },
-  plugins: [admin({ defaultRole: "admin", adminRoles: ["admin"] })],
+  plugins: [admin({ defaultRole: "user", adminRoles: ["admin"] })],
 });
 
 export type AuthSession = typeof auth.$Infer.Session;
