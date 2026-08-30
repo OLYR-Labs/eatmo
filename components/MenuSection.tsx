@@ -1,9 +1,24 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { Utensils } from "lucide-react";
 
 import type { MenuCategory } from "@/data/menu";
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  Rice: "/images/menu/rice.jpg",
+  Kotthu: "/images/menu/kotthu.jpg",
+  Chopsuey: "/images/menu/chopsuey.jpg",
+  Noodles: "/images/menu/noodles.jpg",
+  Devilled: "/images/menu/devilled.jpg",
+  Omelet: "/images/menu/omelet.jpg",
+  Stew: "/images/menu/stew.jpg",
+  Fry: "/images/menu/fry.jpg",
+  "Black Curry": "/images/menu/black-curry.jpg",
+  "Rice & Curry": "/images/menu/rice-and-curry.jpg",
+  Special: "/images/menu/special.jpg",
+};
 
 export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
   const [active, setActive] = useState(menu[0]?.category ?? "Rice");
@@ -18,9 +33,10 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
   const hasSizes = category.items.some(
     (item) => item.small !== undefined || item.large !== undefined
   );
+  const categoryImage = CATEGORY_IMAGES[category.category];
 
   return (
-    <section id="menu" className="bg-[#f4f0fa] py-16 md:py-24">
+    <section id="menu" className="bg-[#f3edff] py-16 md:py-24">
       <div className="container">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
@@ -58,32 +74,46 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
         </div>
 
         <div className="soft mt-6 overflow-hidden bg-white shadow-sm">
-          <div className="bg-gradient-to-r from-[#4b249f] via-[#6d3fd1] to-[#9467df] px-5 py-7 text-white md:px-8">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-200">
-                  EATMO MENU
-                </p>
-                <h3 className="display mt-2 text-3xl md:text-4xl">
-                  {category.category}
-                </h3>
+          <div className="relative min-h-[190px] overflow-hidden text-white md:min-h-[230px]">
+            {categoryImage ? (
+              <Image
+                src={categoryImage}
+                alt={`${category.category} dishes at EATMO Cabana & Restaurant`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 1200px"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-[#4b249f] via-[#6d3fd1] to-[#9467df]" />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/25" />
+            <div className="absolute inset-0 flex items-end p-5 md:p-8">
+              <div className="flex w-full items-end justify-between gap-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-100">
+                    EATMO MENU
+                  </p>
+                  <h3 className="display mt-2 text-3xl drop-shadow md:text-5xl">
+                    {category.category}
+                  </h3>
+                </div>
+                <Utensils className="mb-1 shrink-0 text-white/80" size={28} />
               </div>
-              <Utensils className="mt-1 shrink-0 text-purple-200" size={26} />
             </div>
 
             {hasSizes && (
-              <div className="mt-6 hidden justify-end gap-2 pr-1 sm:flex">
-                <div className="w-[105px] text-center text-[10px] font-bold uppercase tracking-wider text-purple-200">
+              <div className="absolute bottom-6 right-7 hidden gap-2 sm:flex">
+                <div className="w-[105px] text-center text-[10px] font-bold uppercase tracking-wider text-white/80">
                   Small
                 </div>
-                <div className="w-[105px] text-center text-[10px] font-bold uppercase tracking-wider text-purple-200">
+                <div className="w-[105px] text-center text-[10px] font-bold uppercase tracking-wider text-white/80">
                   Large
                 </div>
               </div>
             )}
           </div>
 
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-purple-100 bg-[#fbf9ff]">
             {category.items.map((item, index) => {
               const hasPrice = item.price !== undefined;
               const hasSmall = item.small !== undefined;
@@ -92,7 +122,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
               return (
                 <div
                   key={`${category.category}-${item.name}-${index}`}
-                  className="px-5 py-5 transition hover:bg-purple-50/50 md:px-8"
+                  className="bg-[#fbf9ff] px-5 py-5 transition hover:bg-[#f4eeff] md:px-8"
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="min-w-0">
@@ -106,7 +136,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
 
                     {hasPrice ? (
                       <div className="flex shrink-0 items-center sm:min-w-[220px] sm:justify-end">
-                        <div className="rounded-2xl bg-purple-50 px-6 py-3 text-right">
+                        <div className="rounded-2xl bg-purple-100/80 px-6 py-3 text-right">
                           <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
                             Price
                           </span>
@@ -117,7 +147,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
                       </div>
                     ) : hasSmall || hasLarge ? (
                       <div className="flex shrink-0 items-center gap-2 sm:min-w-[220px] sm:justify-end">
-                        <div className="w-[105px] rounded-2xl bg-purple-50 px-3 py-3 text-center">
+                        <div className="w-[105px] rounded-2xl bg-purple-100/80 px-3 py-3 text-center">
                           <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
                             Small
                           </span>
@@ -125,7 +155,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
                             {hasSmall ? `LKR ${item.small!.toLocaleString()}` : "—"}
                           </span>
                         </div>
-                        <div className="w-[105px] rounded-2xl bg-purple-50 px-3 py-3 text-center">
+                        <div className="w-[105px] rounded-2xl bg-purple-100/80 px-3 py-3 text-center">
                           <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
                             Large
                           </span>
@@ -146,7 +176,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
           </div>
 
           {category.notes && category.notes.length > 0 && (
-            <div className="border-t border-purple-100 bg-purple-50 px-5 py-5 md:px-8">
+            <div className="border-t border-purple-100 bg-[#f3edff] px-5 py-5 md:px-8">
               <p className="text-xs font-bold uppercase tracking-wider text-purple-600">
                 Special options
               </p>
