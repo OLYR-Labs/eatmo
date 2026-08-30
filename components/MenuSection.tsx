@@ -36,7 +36,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
   const categoryImage = CATEGORY_IMAGES[category.category];
 
   return (
-    <section id="menu" className="bg-[#f3edff] py-16 md:py-24">
+    <section id="menu" className="py-16 md:py-24">
       <div className="container">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
@@ -113,7 +113,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
             )}
           </div>
 
-          <div className="divide-y divide-purple-100 bg-[#fbf9ff]">
+          <div className="divide-y divide-purple-100">
             {category.items.map((item, index) => {
               const hasPrice = item.price !== undefined;
               const hasSmall = item.small !== undefined;
@@ -122,7 +122,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
               return (
                 <div
                   key={`${category.category}-${item.name}-${index}`}
-                  className="bg-[#fbf9ff] px-5 py-5 transition hover:bg-[#f4eeff] md:px-8"
+                  className="bg-[#eee7ff] px-5 py-5 transition hover:bg-[#e6dcff] md:px-8"
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="min-w-0">
@@ -176,7 +176,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
           </div>
 
           {category.notes && category.notes.length > 0 && (
-            <div className="border-t border-purple-100 bg-[#f3edff] px-5 py-5 md:px-8">
+            <div className="border-t border-purple-100 bg-[#e7ddff] px-5 py-5 md:px-8">
               <p className="text-xs font-bold uppercase tracking-wider text-purple-600">
                 Special options
               </p>
