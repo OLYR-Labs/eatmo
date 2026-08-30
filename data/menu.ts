@@ -111,8 +111,11 @@ export const menu: MenuCategory[] = [
   },
   {
     category: "Rice & Curry",
-    items: [],
-    notes: ["Menu items and pricing to be added by EATMO."],
+    items: [
+      { name: "Chicken", price: 500 },
+      { name: "Fish", price: 500 },
+      { name: "Vegetable", price: 500 },
+    ],
   },
   {
     category: "Special",
