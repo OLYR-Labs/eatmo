@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "prisma db push",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
@@ -14,8 +15,10 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@better-auth/prisma-adapter": "^1.7.2",
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
+    "better-auth": "^1.7.2",
     "dotenv": "^17.2.1",
     "lucide-react": "^0.468.0",
     "next": "16.2.12",
