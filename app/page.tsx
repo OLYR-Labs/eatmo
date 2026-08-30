@@ -714,7 +714,7 @@ export default function Home() {
                 className="transition hover:text-white"
               >
                 Contact
-              </a>
+              </a>~
 
               
               
