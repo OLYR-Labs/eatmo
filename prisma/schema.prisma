@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model MenuCategory {
+  id        String     @id @default(cuid())
+  name      String
+  notes     String[]   @default([])
+  sortOrder Int        @default(0)
+  active    Boolean    @default(true)
+  items     MenuItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([sortOrder])
+}
+
+model MenuItem {
+  id          String       @id @default(cuid())
+  categoryId  String
+  name        String
+  description String?
+  price       Int?
+  small       Int?
+  large       Int?
+  unit        String?
+  sortOrder   Int          @default(0)
+  available   Boolean      @default(true)
+  category    MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([categoryId, sortOrder])
+  @@index([available])
+}
