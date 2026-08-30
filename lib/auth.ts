@@ -15,7 +15,7 @@ export const auth = betterAuth({
     revokeSessionsOnPasswordReset: true,
   },
   session: { expiresIn: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24 },
-  plugins: [admin({ defaultRole: "user", adminRoles: ["admin"] })],
+  plugins: [admin({ defaultRole: "admin", adminRoles: ["admin"] })],
 });
 
 export type AuthSession = typeof auth.$Infer.Session;
