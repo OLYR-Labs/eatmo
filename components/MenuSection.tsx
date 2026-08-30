@@ -7,17 +7,17 @@ import { Utensils } from "lucide-react";
 import type { MenuCategory } from "@/data/menu";
 
 const CATEGORY_IMAGES: Record<string, string> = {
-  Rice: "/images/menu/rice.jpg",
-  Kotthu: "/images/menu/kotthu.jpg",
-  Chopsuey: "/images/menu/chopsuey.jpg",
-  Noodles: "/images/menu/noodles.jpg",
-  Devilled: "/images/menu/devilled.jpg",
-  Omelet: "/images/menu/omelet.jpg",
-  Stew: "/images/menu/stew.jpg",
-  Fry: "/images/menu/fry.jpg",
-  "Black Curry": "/images/menu/black-curry.jpg",
-  "Rice & Curry": "/images/menu/rice-and-curry.jpg",
-  Special: "/images/menu/special.jpg",
+  Rice: "/images/rice.jpg",
+  Kotthu: "/images/kotthu.jpg",
+  Chopsuey: "/images/chopsuey.jpg",
+  Noodles: "/images/noodles.jpg",
+  Devilled: "/images/devilled.jpg",
+  Omelet: "/images/omlet.jpg",
+  Stew: "/images/stew.jpg",
+  Fry: "/images/fry.jpg",
+  "Black Curry": "/images/black-curry.jpg",
+  "Rice & Curry": "/images/rice-and-curry.jpg",
+  Special: "/images/special.jpg",
 };
 
 export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
