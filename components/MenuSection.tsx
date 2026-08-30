@@ -113,7 +113,7 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
             )}
           </div>
 
-          <div className="divide-y divide-purple-100">
+          <div className="divide-y divide-purple-900/30 bg-gradient-to-b from-[#35165c] via-[#2b124b] to-[#24103f]">
             {category.items.map((item, index) => {
               const hasPrice = item.price !== undefined;
               const hasSmall = item.small !== undefined;
@@ -122,13 +122,13 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
               return (
                 <div
                   key={`${category.category}-${item.name}-${index}`}
-                  className="bg-[#eee7ff] px-5 py-5 transition hover:bg-[#e6dcff] md:px-8"
+                  className="bg-transparent px-5 py-5 transition-colors hover:bg-white/[0.05] md:px-8"
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="min-w-0">
-                      <h4 className="font-bold text-gray-900">{item.name}</h4>
+                      <h4 className="font-bold text-white">{item.name}</h4>
                       {item.unit && (
-                        <p className="mt-1 text-xs font-medium text-gray-500">
+                        <p className="mt-1 text-xs font-medium text-purple-200/80">
                           {item.unit}
                         </p>
                       )}
@@ -136,36 +136,36 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
 
                     {hasPrice ? (
                       <div className="flex shrink-0 items-center sm:min-w-[220px] sm:justify-end">
-                        <div className="rounded-2xl bg-purple-100/80 px-6 py-3 text-right">
-                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
+                        <div className="rounded-2xl border border-purple-300/20 bg-purple-950/40 px-6 py-3 text-right shadow-sm">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-200/70">
                             Price
                           </span>
-                          <span className="text-base font-bold text-[var(--purple-dark)]">
+                          <span className="text-base font-bold text-white">
                             LKR {item.price!.toLocaleString()}
                           </span>
                         </div>
                       </div>
                     ) : hasSmall || hasLarge ? (
                       <div className="flex shrink-0 items-center gap-2 sm:min-w-[220px] sm:justify-end">
-                        <div className="w-[105px] rounded-2xl bg-purple-100/80 px-3 py-3 text-center">
-                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
+                        <div className="w-[105px] rounded-2xl border border-purple-300/20 bg-purple-950/40 px-3 py-3 text-center shadow-sm">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-200/70">
                             Small
                           </span>
-                          <span className="mt-1 block text-sm font-bold text-[var(--purple-dark)]">
+                          <span className="mt-1 block text-sm font-bold text-white">
                             {hasSmall ? `LKR ${item.small!.toLocaleString()}` : "—"}
                           </span>
                         </div>
-                        <div className="w-[105px] rounded-2xl bg-purple-100/80 px-3 py-3 text-center">
-                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-500">
+                        <div className="w-[105px] rounded-2xl border border-purple-300/20 bg-purple-950/40 px-3 py-3 text-center shadow-sm">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-200/70">
                             Large
                           </span>
-                          <span className="mt-1 block text-sm font-bold text-[var(--purple-dark)]">
+                          <span className="mt-1 block text-sm font-bold text-white">
                             {hasLarge ? `LKR ${item.large!.toLocaleString()}` : "—"}
                           </span>
                         </div>
                       </div>
                     ) : (
-                      <div className="rounded-2xl bg-gray-50 px-5 py-3 text-sm font-semibold text-gray-400">
+                      <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-purple-200/60">
                         Price unavailable
                       </div>
                     )}
@@ -176,15 +176,15 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
           </div>
 
           {category.notes && category.notes.length > 0 && (
-            <div className="border-t border-purple-100 bg-[#e7ddff] px-5 py-5 md:px-8">
-              <p className="text-xs font-bold uppercase tracking-wider text-purple-600">
+            <div className="border-t border-purple-300/10 bg-[#2b124b] px-5 py-5 md:px-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-purple-200">
                 Special options
               </p>
               <div className="mt-3 flex flex-wrap gap-3">
                 {category.notes.map((note, index) => (
                   <div
                     key={`${category.category}-note-${index}`}
-                    className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-gray-700 shadow-sm"
+                    className="rounded-2xl border border-purple-300/10 bg-purple-950/40 px-4 py-3 text-sm font-semibold text-purple-50 shadow-sm"
                   >
                     {note}
                   </div>
