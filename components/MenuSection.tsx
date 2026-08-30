@@ -136,30 +136,30 @@ export default function MenuSection({ menu }: { menu: MenuCategory[] }) {
 
                     {hasPrice ? (
                       <div className="flex shrink-0 items-center sm:min-w-[220px] sm:justify-end">
-                        <div className="rounded-2xl border border-purple-300/20 bg-purple-950/40 px-6 py-3 text-right shadow-sm">
-                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-200/70">
+                        <div className="rounded-2xl bg-white px-6 py-3 text-right shadow-sm">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-gray-500">
                             Price
                           </span>
-                          <span className="text-base font-bold text-white">
+                          <span className="text-base font-bold text-black">
                             LKR {item.price!.toLocaleString()}
                           </span>
                         </div>
                       </div>
                     ) : hasSmall || hasLarge ? (
                       <div className="flex shrink-0 items-center gap-2 sm:min-w-[220px] sm:justify-end">
-                        <div className="w-[105px] rounded-2xl border border-purple-300/20 bg-purple-950/40 px-3 py-3 text-center shadow-sm">
-                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-200/70">
+                        <div className="w-[105px] rounded-2xl bg-white px-3 py-3 text-center shadow-sm">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-gray-500">
                             Small
                           </span>
-                          <span className="mt-1 block text-sm font-bold text-white">
+                          <span className="mt-1 block text-sm font-bold text-black">
                             {hasSmall ? `LKR ${item.small!.toLocaleString()}` : "—"}
                           </span>
                         </div>
-                        <div className="w-[105px] rounded-2xl border border-purple-300/20 bg-purple-950/40 px-3 py-3 text-center shadow-sm">
-                          <span className="block text-[10px] font-bold uppercase tracking-wider text-purple-200/70">
+                        <div className="w-[105px] rounded-2xl bg-white px-3 py-3 text-center shadow-sm">
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-gray-500">
                             Large
                           </span>
-                          <span className="mt-1 block text-sm font-bold text-white">
+                          <span className="mt-1 block text-sm font-bold text-black">
                             {hasLarge ? `LKR ${item.large!.toLocaleString()}` : "—"}
                           </span>
                         </div>
